@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+ephemeral_gcs_storage/*
+!ephemeral_gcs_storage/.gitkeep
+.pytest_cache/
+*.log

@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: gola-pdf-suite
+    env: docker
+    plan: free
+    region: frankfurt
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: PORT
+        value: 8080

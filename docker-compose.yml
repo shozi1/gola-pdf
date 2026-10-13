@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: golapdf_app
+    restart: always
+    environment:
+      - PORT=8080
+      - GCS_BUCKET_NAME=gola-pdf-storage
+      - GCS_PROJECT_ID=gola-pdf-cloud
+      - GCS_RETENTION_HOURS=2.0
+    volumes:
+      - ephemeral_data:/app/ephemeral_gcs_storage
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+volumes:
+  ephemeral_data:
+    driver: local
